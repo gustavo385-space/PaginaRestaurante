@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costeñol Food | The Caribbean Flavor in One Page</title>
+    <style>
+        /* ================================================= */
+        /* === 1. RESET AND GLOBAL VARIABLES (BASIC ALGORITHMS) === */
+        /* ================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth; /* Smooth scrolling between sections */
+        }
+
+        /* Caribbean Color Palette */
+        :root {
+            --color-primary: #000000; /* Black */
+            --color-secondary: #1a1a1a; /* Dark Gray for cards and sections */
+            --color-accent-caribe: #FF9933; /* Warm Orange/Coral (Main Accent) */
+            --color-accent-ocean: #00CED1; /* Dark Turquoise (Secondary Accent) */
+            --color-text-light: #e0e0e0; /* Light Text */
+            --color-text-subtle: #999999; /* Subtle Text */
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-primary); 
+            color: var(--color-text-light); 
+            
+            /* Cutlery background - Use the uploaded file name */
+            background-image: url('WhatsApp Image 2025-10-02 at 3.20.12 AM.jpeg'); 
+            background-repeat: repeat;
+            background-size: 180px; /* Subtle size */
+            filter: brightness(0.5); /* Filter for a very subtle, dark look */
+            background-blend-mode: luminosity; 
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* ================================================= */
+        /* === 2. HEADER AND NAVIGATION === */
+        /* ================================================= */
+
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 2.5rem 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 3.5rem; 
+            color: var(--color-accent-caribe); 
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--color-text-subtle); 
+        }
+
+        /* NAVIGATION BAR STYLES */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--color-secondary);
+            text-align: center;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--color-accent-caribe);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin: 0 1.5rem;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--color-accent-caribe);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        /* ================================================= */
+        /* === 3. HOME SECTION (HERO) === */
+        /* ================================================= */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; 
+            text-align: center;
+            /* Placeholder image. Please update 'imgenes/main_dish.jpg' */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('imgenes/plato_principal.jpg') no-repeat center center;
+            background-size: cover;
+            border-bottom: 5px solid var(--color-accent-caribe);
+        }
+
+        .hero-section h2 {
+            font-size: 4rem;
+            color: var(--color-accent-ocean);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+        
+        .hero-section p {
+            font-size: 1.5rem;
+            color: var(--color-text-light);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-accent-caribe);
+            color: var(--color-primary);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #FF7F00; 
+            transform: scale(1.05);
+        }
+
+        /* ================================================= */
+        /* === 4. MENU SECTION (Container) === */
+        /* ================================================= */
+
+        #menu .intro {
+            background: var(--color-secondary);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Menu Card Styles */
+        .dish-card {
+            background: var(--color-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .dish-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+
+        .dish-card:hover .dish-photo {
+            transform: scale(1.05);
+        }
+
+        .dish-content {
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .dish-title {
+            font-size: 1.8rem;
+            color: var(--color-accent-caribe); 
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .dish-price {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background-color: var(--color-accent-ocean);
+            color: var(--color-primary); 
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .dish-country {
+            display: inline-block;
+            color: var(--color-text-subtle);
+            padding: 0.3rem 0;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .dish-description {
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .dish-ingredients {
+            background: #222222;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--color-accent-ocean); 
+        }
+
+        .dish-ingredients h4 {
+            color: var(--color-text-light); 
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .dish-ingredients p {
+            color: var(--color-text-light); 
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* ================================================= */
+        /* === 5. ABOUT SECTION (Mission/Vision/History) === */
+        /* ================================================= */
+
+        .story-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .story-block {
+            background: var(--color-secondary);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            border-left: 5px solid var(--color-accent-ocean);
+        }
+        
+        .story-block.mission { border-left-color: var(--color-accent-caribe); }
+
+        .story-block h2 {
+            font-size: 2rem;
+            color: var(--color-accent-caribe);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-text-subtle);
+            padding-bottom: 0.5rem;
+        }
+
+        .story-block p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            text-align: justify;
+        }
+
+        /* ================================================= */
+        /* === 6. FOOTER AND RESPONSIVENESS === */
+        /* ================================================= */
+
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 4rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+        }
+
+        .contact-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            color: var(--color-text-light);
+            font-size: 1rem;
+            margin: 0.2rem 0;
+        }
+
+        .contact-info p:first-child {
+             color: var(--color-accent-ocean); 
+             font-weight: bold; 
+             font-size: 1.1rem; 
+             margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            .container { padding: 0 0.5rem; }
+            .dishes-grid { grid-template-columns: 1fr; }
+            .dish-price { font-size: 1.2rem; padding: 0.4rem 0.8rem; }
+            .hero-section h2 { font-size: 2.5rem; }
+            .hero-section { height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Costeñol Food</h1>
+        <p class="subtitle">A vibrant journey through flavors, traditions, and culture</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">History & Mission</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home" class="hero-section">
+        <h2>The Authentic Flavor of the Colombian Caribbean</h2>
+        <p>
+            Dive into an unforgettable culinary journey. At Costeñol Food, every dish is a celebration of ancestral recipes, the freshest ingredients, and the unmistakable coastal flavor
+        </p>
+        <a href="#menu" class="cta-button">View Our Vibrant Menu</a>
+    </section>
+
+    <div class="container">
+        <section id="menu">
+            <h2 style="color: var(--color-accent-ocean); text-align: center; font-size: 2.5rem; margin-top: 3rem;">Our Coastal Delicacies</h2>
+            <div class="intro">
+                <p>
+                    The Authentic Flavor of the Colombian Caribbean!
+                    Welcome! Dive into our menu and discover the vibrant essence of the coast.
+                    Every dish is a celebration of ancestral recipes, the freshest ingredients, and the unmistakable taste of the Caribbean.
+                    Get your palate ready for the joy and the true **sazón costeña** (coastal flavor)!
+                </p>
+            </div>
+
+            <div class="dishes-grid">
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="imgenes/bandeja.jpg" alt="Bandeja Paisa" class="dish-photo">
+                    </div>
+                    <div class="dish-content">
+                        <h2 class="dish-title">Bandeja Paisa</h2>
+                        <span class="dish-country">Medellín (Guest Dish)</span>
+                        <p class="dish-description">
+                            The Bandeja Paisa is widely regarded as the most representative and iconic dish of Colombian cuisine. Its name translates literally to the "Paisa Platter," referring to the inhabitants of the mountainous Antioquia region where the dish originated.
+                        </p>
+                        <div class="dish-ingredients">
+                            <h4>Key Ingredients:</h4>
+                            <p>Red Beans, White rice, Ground beef, Crispy pork belly, chorizo, fried egg, Sweet Plantain, Arepa, Avocado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="imgenes/sopa.jpg" alt="Beef Rib Soup" class="dish-photo">
+                    </div>
+                    <div class="dish-content">
+                        <h2 class="dish-title">Sopa de Costilla</h2>
+                        <span class="dish-country">Atlántico</span> 
+                        <p class="dish-description">
+                            This traditional soup is made with beef ribs slowly simmered to create a rich broth. It usually includes potatoes, cassava (yuca), green plantain, carrots, onions, garlic, and fresh herbs such as cilantro.
+                        </p>
+                        <div class="dish-ingredients">
+                            <h4>Key Ingredients:</h4>
+                            <p>Beef ribs, potatoes, cassava (yuca), green plantain, carrots, onions, garlic, and fresh herbs such as cilantro.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="imgenes/Arroz.jpg" alt="Lisa Rice" class="dish-photo">
+                    </div>
+                    <div class="dish-content">
+                        <h2 class="dish-title">Arroz de Lisa</h2>
+                        <span class="dish-country">Atlántico</span>
+                        <p class="dish-description">
+                            A unique and traditional rice dish made with dried and salted lisa (mullet fish), cooked in a yellowish broth with vegetables. It is often served with a portion of bollo de yuca and sometimes a dollop of suero costeño (sour cream).
+                        </p>
+                        <div class="dish-ingredients">
+                            <h4>Key Ingredients:</h4>
+                            <p>Lisa (mullet fish), white rice, onion, garlic, colored with achiote/annatto, and local herbs. Served with Bollo de Yuca and Suero Costeño.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="imgenes/buti.jpg" alt="Butifarra Sausage" class="dish-photo">
+                    </div>
+                    <div class="dish-content">
+                        <h2 class="dish-title">Butifarra</h2>
+                        <span class="dish-country">Atlántico</span>
+                        <p class="dish-description">
+                            A short, thick, pre-cooked sausage made of beef and pork, famous for its distinctive flavor and texture. It is a very popular, savory snack from the town of Soledad near Barranquilla, served in small segments with lime juice.
+                        </p>
+                        <div class="dish-ingredients">
+                            <h4>Key Ingredients:</h4>
+                            <p>Ground beef and pork meat, salt, pepper, cumin, other spices, and often a touch of vinegar. It is briefly boiled, then smoked or cured.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="imgenes/caribañola.jpg" alt="Caribañola" class="dish-photo">
+                    </div>
+                    <div class="dish-content">
+                        <h2 class="dish-title">Caribañola</h2>
+                        <span class="dish-country">Atlántico</span>
+                        <p class="dish-description">
+                            A torpedo-shaped fritter made from a mashed yuca (cassava) dough, typically stuffed with seasoned ground beef or shredded chicken, then deep-fried until golden and crispy. It is a popular snack or appetizer.
+                        </p>
+                        <div class="dish-ingredients">
+                            <h4>Key Ingredients:</h4>
+                            <p>Yuca (cassava), ground beef or shredded chicken, seasoning (onion, garlic, cumin), and oil for frying.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="imgenes/arepa.jpg" alt="Egg Arepa" class="dish-photo">
+                    </div>
+                    <div class="dish-content">
+                        <h2 class="dish-title">Arepa de Huevo</h2>
+                        <p class="dish-description">
+                            A crispy, deep-fried arepa (corn cake) that has been opened and then filled with a raw egg before being fried again until the corn is golden and the egg is cooked inside. It is one of the most popular street foods on the Coast.
+                        </p>
+                        <div class="dish-ingredients">
+                            <h4>Key Ingredients:</h4>
+                            <p>Pre-cooked white or yellow corn flour, water, salt, and raw chicken egg. Sometimes includes ground meat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="about" class="story-section">
+        <h2 style="color: var(--color-accent-caribe); text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">Our History and Philosophy</h2>
+        
+        <div class="story-block mission">
+            <h2>Our Mission</h2>
+            <p>
+                To offer an authentic and unforgettable gastronomic experience, bringing the flavor and joy of the Colombian Atlantic Coast to every table. We are dedicated to preserving traditional recipes with the highest quality ingredients, promoting the culture and culinary richness of our region.
+            </p>
+        </div>
+
+        <div class="story-block vision">
+            <h2>Our Vision</h2>
+            <p>
+                To be the most recognized Colombian coastal food restaurant nationally, expanding our flavor to new cities while maintaining an unwavering commitment to sustainability and the local community.
+            </p>
+        </div>
+
+        <div class="story-block history">
+            <h2>Our History</h2>
+            <p>
+                Costeñol Food was born in 2023 from a family dream: to share a passion for the Caribbean's flavors. Inspired by Grandmother Elvira and her recipes from Barranquilla, we started with a small place, promising authentic "Arroz de Lisa" and "Arepas de Huevo" made with love. Every ingredient tells a story of sea and land, and every dish we serve celebrates that vibrant heritage that defines us.
+            </p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="contact-info">
+            <p>Contact:</p>
+            <p>📧 Email: contacto@costenol-food.com</p>
+            <p>📞 Phone: +57 300 123 4567</p>
+            <p>📍 Address: Carrera 1 # 10-25, Barranquilla</p>
+        </div>
+        <p>🌊 Costeñol Food: Celebrating the diverse and delicious flavors of Latin America 🌴</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-text-subtle);">
+            © 2025 All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>
